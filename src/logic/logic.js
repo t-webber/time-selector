@@ -1,4 +1,5 @@
 import { incrDay, incrMonth } from "./dates.js";
+import { getArithmetic } from "./arithmetic.js";
 
 const STRINGS = {
     today: new Date(),
@@ -21,39 +22,6 @@ const getStringsIdent = (res, input) => {
                 date: value,
                 text: ident[0].toUpperCase() + ident.slice(1),
             });
-        }
-    }
-};
-
-const getArithmetic = (res, input) => {
-    if (!input.startsWith("+") && !input.startsWith("-")) return;
-    if (input == "+" || input == "-") return;
-    if (input == "+0" || input == "-0" || input == "0") {
-        res.push({ text: "Today", date: new Date() });
-    } else if (input == "+1") {
-        res.push({ text: "Tomorrow", date: incrDay(1) });
-    } else if (input == "-1") {
-        res.push({ text: "Yesterday", date: incrDay(-1) });
-    } else {
-        const nbStr = input.slice(1);
-        try {
-            const nbInt = parseInt(nbStr);
-            if (Number.isInteger(nbInt)) {
-                res.push({ date: incrDay(nbInt), text: `In ${nbInt} days` });
-                res.push({
-                    date: incrDay(7 * nbInt),
-                    text: `In ${nbInt} weeks`,
-                });
-                res.push({
-                    date: incrMonth(nbInt),
-                    text: `In ${nbInt} months`,
-                });
-                res.push({
-                    date: incrMonth(12 * nbInt),
-                    text: `In ${nbInt} years`,
-                });
-            }
-        } finally {
         }
     }
 };
