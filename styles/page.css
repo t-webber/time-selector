@@ -11,11 +11,12 @@ html {
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
 main {
+    position: absolute;
+    top: 200px;
     display: flex;
     flex-direction: column;
     gap: 5px;
