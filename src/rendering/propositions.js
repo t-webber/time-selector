@@ -16,6 +16,7 @@ const onItemClick = (date) => {
 
 export const displaybox = (input) => {
     resetDisplay();
+    // console.log("[INPUT] ", input);
     const propositions = getPropositions(input);
     // console.log("[PROPOSITIONS] ", JSON.stringify(propositions));
     if (propositions) {

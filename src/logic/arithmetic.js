@@ -1,9 +1,9 @@
 import { incrDay, incrMonth } from "./dates.js";
 
-const y = (s) => "year".startsWith(s);
-const m = (s) => "month".startsWith(s);
-const w = (s) => "week".startsWith(s);
-const d = (s) => "day".startsWith(s);
+const y = (s) => "years".startsWith(s);
+const m = (s) => "months".startsWith(s);
+const w = (s) => "weeks".startsWith(s);
+const d = (s) => "days".startsWith(s);
 
 const plusOne = (res, s) => {
     if (d(s)) res.push({ text: "Tomorrow", date: incrDay(1) });
@@ -105,7 +105,6 @@ const plusMinusHandle = (res, nb, both, s) => {
 
 const removeHeadNumbers = (s) => {
     let index = 0;
-    console.log("before", s);
     while (Number.isNaN(parseInt(s[index])) && index < s.length) {
         index++;
     }
@@ -115,12 +114,10 @@ const removeHeadNumbers = (s) => {
     while (Number.isInteger(parseInt(s[index])) && index < s.length) {
         index++;
     }
-    console.log("after", s.slice(index));
     return s.slice(index);
 };
 
 export const getArithmetic = (res, input) => {
-    input = input.replace(/\s/g, "");
     if (!input.startsWith("+") && !input.startsWith("-")) {
         if (Number.isNaN(parseInt(input[0]))) return;
         const nb = parseInt(input);

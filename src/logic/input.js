@@ -47,7 +47,8 @@ export const convertStringInput = (input) => {
         input = "+" + input.slice(2);
     }
     const words = input
-        .replace(/[^a-zA-Z0-9+-]/g, " ")
+        .toLowerCase()
+        .replace(/[^a-z0-9+-]/g, " ")
         .trim()
         .split(/\s+/);
     var parsed = [];
