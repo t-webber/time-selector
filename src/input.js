@@ -1,3 +1,5 @@
+import { displaybox } from "./propositions.js";
+
 const INPUT = document.getElementById("input");
 
 INPUT.onkeyup = (e) => {
@@ -5,5 +7,6 @@ INPUT.onkeyup = (e) => {
         alert("Enter !");
     } else {
         console.log(e.target.value);
+        displaybox(e.target.value);
     }
 };

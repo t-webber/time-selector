@@ -1,5 +1,6 @@
 input {
-    background: darkgrey;
+    background: #ccc;
     padding: 5px 10px;
     border-radius: 10px;   
+    width: 300px;
 }

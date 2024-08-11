@@ -1,0 +1,22 @@
+#propositions {
+    display: flex;
+    flex-direction: column;
+}
+
+#propositions > .item {
+    background: #aaa;
+    padding: 2px 5px;
+    width: 300p;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+#propositions > .item:first-child {
+    border-radius: 5px 5px 0px 0px;
+}
+
+#propositions > .item:last-child {
+    border-radius: 0px 0px 5px 5px;
+    border-bottom: 1px solid white;
+}

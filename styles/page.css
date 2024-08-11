@@ -5,7 +5,7 @@
 }
 
 html {
-    background:black;
+    background: black;
 }
 
 body {
@@ -16,5 +16,7 @@ body {
 }
 
 main {
-    background: black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
