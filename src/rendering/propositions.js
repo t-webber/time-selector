@@ -17,10 +17,9 @@ const onItemClick = (date) => {
 export const displaybox = (input) => {
     resetDisplay();
     const propositions = getPropositions(input);
-    console.log("got propostions = ", JSON.stringify(propositions));
+    // console.log("[PROPOSITIONS] ", JSON.stringify(propositions));
     if (propositions) {
         for (let proposition of propositions) {
-            console.log(proposition);
             const item = document.createElement("button");
             item.className = "item";
             const title = document.createElement("h3");

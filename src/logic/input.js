@@ -43,6 +43,9 @@ const parseAnd = (string, succ, fail) => {
 };
 
 export const convertStringInput = (input) => {
+    if (input.startsWith("in")) {
+        input = "+" + input.slice(2);
+    }
     const words = input
         .replace(/[^a-zA-Z0-9+-]/g, " ")
         .trim()
@@ -75,10 +78,7 @@ export const convertStringInput = (input) => {
                 if (["and", "+"].includes(last)) {
                     parseAnd(
                         res.pop(),
-                        (int) => {
-                            res.push(int + current);
-                            console.log("before", int);
-                        },
+                        (int) => res.push(int + current),
                         (str) => res.push(str, last, current)
                     );
                 } else if (last == "-") {

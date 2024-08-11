@@ -16,7 +16,6 @@ const STRINGS = {
 };
 
 const getStringsIdent = (res, input) => {
-    console.log(JSON.stringify(Object.entries(STRINGS)));
     for (let [ident, value] of Object.entries(STRINGS)) {
         if (ident.startsWith(input)) {
             res.push({
@@ -29,12 +28,10 @@ const getStringsIdent = (res, input) => {
 
 export const getPropositions = (input) => {
     input = convertStringInput(input);
+    // console.log("[CONVERTED INPUT]", input);
     if (!input) return [];
     var res = [];
     getStringsIdent(res, input);
-    if (input.startsWith("in")) {
-        input = "+" + input.slice(2);
-    }
     getArithmetic(res, input);
     if (res.length == 0) return undefined;
     return res.slice(0, Math.min(res.length, 10));
