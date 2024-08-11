@@ -1,13 +1,4 @@
-const incrDay = (nbDays) => {
-    const date = new Date();
-    date.setDate(date.getDate() + nbDays);
-    return date;
-};
-const incrMonth = (nbMonths) => {
-    const date = new Date();
-    date.setMonth(date.getMonth() + nbMonths);
-    return date;
-};
+import { incrDay, incrMonth } from "./dates.js";
 
 const STRINGS = {
     today: new Date(),

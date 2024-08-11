@@ -1,1 +1,1 @@
-import "./input.js";
+import "./rendering/input.js";

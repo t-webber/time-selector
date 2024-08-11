@@ -1,4 +1,5 @@
-import { getPropositions } from "./logic.js";
+import { getPropositions } from "../logic/logic.js";
+import { getDayAndMonthStr } from "../logic/dates.js";
 
 const BOX = document.getElementById("propositions");
 const ERRORS = document.getElementById("errors");
@@ -6,6 +7,11 @@ const ERRORS = document.getElementById("errors");
 const resetDisplay = () => {
     BOX.innerHTML = "";
     ERRORS.innerHTML = "";
+};
+
+const onItemClick = (date) => {
+    const dateInfo = getDayAndMonthStr(date);
+    window.location.href = `https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/${dateInfo.month}_${dateInfo.day}`;
 };
 
 export const displaybox = (input) => {
@@ -23,6 +29,7 @@ export const displaybox = (input) => {
             const content = document.createElement("p");
             content.innerText = proposition.date.toLocaleDateString();
             item.appendChild(content);
+            item.onclick = () => onItemClick(proposition.date);
             BOX.appendChild(item);
         }
     } else {
