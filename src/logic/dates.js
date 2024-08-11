@@ -22,6 +22,7 @@ export const incrDay = (nbDays) => {
     date.setDate(date.getDate() + nbDays);
     return date;
 };
+
 export const incrMonth = (nbMonths) => {
     const date = new Date();
     date.setMonth(date.getMonth() + nbMonths);

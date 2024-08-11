@@ -27,30 +27,72 @@ const NUMBERS_WORDS = {
     seventy: 70,
     eighty: 80,
     ninety: 90,
+    hundred: 100,
+    thousand: 1_000,
+    million: 1_000_000,
+    billion: 1_000_000_000,
+};
+
+const parseAnd = (string, succ, fail) => {
+    const int = parseInt(string);
+    if (Number.isNaN(int)) {
+        fail(string);
+    } else {
+        succ(int);
+    }
 };
 
 export const convertStringInput = (input) => {
     const words = input
-        .reaplce("and", "")
-        .replace(/[^a-zA-Z0-9]/g, " ")
+        .replace(/[^a-zA-Z0-9+-]/g, " ")
         .trim()
         .split(/\s+/);
-    var res = [];
+    var parsed = [];
     for (const word of words) {
         if (word in NUMBERS_WORDS) {
-            const current = numberWords[word];
-            const last = res.pop();
-            const lastInt = parseInt(last);
-            if (Number.isNan(lastInt)) {
-                res.push(last, current);
-            } else if (lastInt < current) {
-                res.push(lastInt * current);
-            } else {
-                res.push(lastInt + current);
-            }
+            const current = NUMBERS_WORDS[word];
+            parseAnd(
+                parsed.pop(),
+                (lastInt) => {
+                    if (lastInt < current) {
+                        parsed.push(lastInt * current);
+                    } else {
+                        parsed.push(lastInt + current);
+                    }
+                },
+                (string) => parsed.push(string, current)
+            );
         } else {
-            res.push(word);
+            parsed.push(word);
         }
+    }
+    var res = [];
+    for (const word of parsed) {
+        parseAnd(
+            word,
+            (current) => {
+                const last = res.pop();
+                if (["and", "+"].includes(last)) {
+                    parseAnd(
+                        res.pop(),
+                        (int) => {
+                            res.push(int + current);
+                            console.log("before", int);
+                        },
+                        (str) => res.push(str, last, current)
+                    );
+                } else if (last == "-") {
+                    parseAnd(
+                        res.pop(),
+                        (int) => res.push(int - current),
+                        (str) => res.push(str, last, current)
+                    );
+                } else {
+                    res.push(last, word);
+                }
+            },
+            (str) => res.push(str)
+        );
     }
     return res.join(" ").trim();
 };

@@ -28,7 +28,7 @@ const getStringsIdent = (res, input) => {
 };
 
 export const getPropositions = (input) => {
-    input = convertStringInput();
+    input = convertStringInput(input);
     if (!input) return [];
     var res = [];
     getStringsIdent(res, input);

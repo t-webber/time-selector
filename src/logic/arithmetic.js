@@ -1,3 +1,5 @@
+import { incrDay, incrMonth } from "./dates.js";
+
 const plusOne = (res) => {
     res.push({ text: "Tomorrow", date: incrDay(1) });
     res.push({
@@ -45,6 +47,7 @@ const plus = (res, nb) => {
         text: `In ${nb} years`,
     });
 };
+
 const minus = (res, nb) => {
     res.push({ date: incrDay(nb), text: `${nb} days ago` });
     res.push({
@@ -84,6 +87,7 @@ const plusMinusHandle = (res, nb, both) => {
 };
 
 export const getArithmetic = (res, input) => {
+    console.log(input);
     if (!input.startsWith("+") && !input.startsWith("-")) {
         if (Number.isNaN(parseInt(input[0]))) return;
         const nb = parseInt(input);
