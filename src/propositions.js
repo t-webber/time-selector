@@ -11,11 +11,18 @@ const resetDisplay = () => {
 export const displaybox = (input) => {
     resetDisplay();
     const propositions = getPropositions(input);
+    console.log("got propostions = ", JSON.stringify(propositions));
     if (propositions) {
         for (let proposition of propositions) {
-            const item = document.createElement("p");
+            console.log(proposition);
+            const item = document.createElement("button");
             item.className = "item";
-            item.innerText = proposition;
+            const title = document.createElement("h3");
+            title.innerText = proposition.text;
+            item.appendChild(title);
+            const content = document.createElement("p");
+            content.innerText = proposition.date.toLocaleDateString();
+            item.appendChild(content);
             BOX.appendChild(item);
         }
     } else {

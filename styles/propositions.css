@@ -5,13 +5,17 @@
 
 #propositions > .item {
     background: #aaa;
+    cursor: pointer;
     padding: 2px 5px;
     width: 300p;
     border-top: 1px solid white;
     border-left: 1px solid white;
     border-right: 1px solid white;
 }
+#propositions > .item:hover {
 
+    background: #999;
+}
 #propositions > .item:first-child {
     border-radius: 5px 5px 0px 0px;
 }

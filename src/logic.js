@@ -1,10 +1,12 @@
 const incrDay = (nbDays) => {
     const date = new Date();
     date.setDate(date.getDate() + nbDays);
+    return date;
 };
 const incrMonth = (nbMonths) => {
     const date = new Date();
     date.setMonth(date.getMonth() + nbMonths);
+    return date;
 };
 
 const STRINGS = {
@@ -21,9 +23,13 @@ const STRINGS = {
 };
 
 const getStringsIdent = (res, input) => {
+    console.log(JSON.stringify(Object.entries(STRINGS)));
     for (let [ident, value] of Object.entries(STRINGS)) {
         if (ident.startsWith(input)) {
-            res.push(ident);
+            res.push({
+                date: value,
+                text: ident[0].toUpperCase() + ident.slice(1),
+            });
         }
     }
 };
@@ -31,21 +37,30 @@ const getStringsIdent = (res, input) => {
 const getArithmetic = (res, input) => {
     if (!input.startsWith("+") && !input.startsWith("-")) return;
     if (input == "+" || input == "-") return;
-    if (input == "+0" || input == "-0") {
-        res.push("today");
+    if (input == "+0" || input == "-0" || input == "0") {
+        res.push({ text: "Today", date: new Date() });
     } else if (input == "+1") {
-        res.push("tomorrow");
+        res.push({ text: "Tomorrow", date: incrDay(1) });
     } else if (input == "-1") {
-        res.push("yesterday");
+        res.push({ text: "Yesterday", date: incrDay(-1) });
     } else {
         const nbStr = input.slice(1);
         try {
             const nbInt = parseInt(nbStr);
-            const date = new Date();
-            date.setDate(date.getDate() + nbInt);
-            const value = date.toLocaleDateString();
-            if (value != "Invalid Date") {
-                res.push(date.toLocaleDateString());
+            if (Number.isInteger(nbInt)) {
+                res.push({ date: incrDay(nbInt), text: `In ${nbInt} days` });
+                res.push({
+                    date: incrDay(7 * nbInt),
+                    text: `In ${nbInt} weeks`,
+                });
+                res.push({
+                    date: incrMonth(nbInt),
+                    text: `In ${nbInt} months`,
+                });
+                res.push({
+                    date: incrMonth(12 * nbInt),
+                    text: `In ${nbInt} years`,
+                });
             }
         } finally {
         }
@@ -53,6 +68,7 @@ const getArithmetic = (res, input) => {
 };
 
 export const getPropositions = (input) => {
+    input = input.trim();
     if (!input) return [];
     var res = [];
     getStringsIdent(res, input);
