@@ -1,5 +1,6 @@
 import { incrDay, incrMonth } from "./dates.js";
 import { getArithmetic } from "./arithmetic.js";
+import { convertStringInput } from "./input.js";
 
 const STRINGS = {
     today: new Date(),
@@ -27,7 +28,7 @@ const getStringsIdent = (res, input) => {
 };
 
 export const getPropositions = (input) => {
-    input = input.trim();
+    input = convertStringInput();
     if (!input) return [];
     var res = [];
     getStringsIdent(res, input);

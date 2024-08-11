@@ -1,4 +1,4 @@
-import { getPropositions } from "../logic/logic.js";
+import { getPropositions } from "../logic/main.js";
 import { getDayAndMonthStr } from "../logic/dates.js";
 
 const BOX = document.getElementById("propositions");
